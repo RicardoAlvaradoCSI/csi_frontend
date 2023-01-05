@@ -1,0 +1,36 @@
+
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <label for="">Altas</label>
+    </div>
+    <div class="card-body" >
+      <div class="row">
+        <div class="col-md">
+          <label for="" class="col-sm-2 col-form-label">Numero</label>
+          <input type="number" [(ngModel)]="newUser.Numero"  class="form-control" id="nombre" placeholder="Ingrese Numero">
+        </div>
+
+        <div class="col-md">
+          <label for="" class="col-sm-2 col-form-label">Nombre</label>
+          <input type="text" [(ngModel)]="newUser.Nombre" class="form-control" id="nombre" placeholder="Ingrese Nombre">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <label for="" class="col-sm-2 col-form-label">Descripcion</label>
+          <input type="text"  [(ngModel)]="newUser.Descripcion"  class="form-control" id="Descripcion" placeholder="Ingrese Descripcion">
+        </div>
+        <div class="col-md">
+          <label for="" class="col-sm-2 col-form-label">Default</label>
+          <input type="number"  [(ngModel)]="newUser.Default"  class="form-control" id="Default" placeholder="Ingrese Default">
+        </div>
+      </div>
+    </div>
+    <div class="col-py-3,col-md">
+      <button type="button" class="btn btn-primary"  routerLink="">Regresar</button>
+      <button  type="button" class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
+
+</div>

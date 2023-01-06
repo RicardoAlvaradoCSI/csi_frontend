@@ -1,5 +1,5 @@
 export class UsuariosModel {
-  Id?: number;
+  id?: number;
   Numero?: number;
   Nombre?: string;
   Descripcion?: string;

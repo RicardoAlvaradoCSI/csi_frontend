@@ -20,6 +20,10 @@ export class UsuariosSerService {
     return this.http.post(this.api+'/newUser',user);
   }
 
+  getUsuarios():Observable<any>{
+    return this.http.get(this.api+'/prueba1');
+  }
+
   //private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 }

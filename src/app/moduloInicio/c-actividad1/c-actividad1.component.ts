@@ -17,25 +17,7 @@ user:UsuariosModel[]= [];
   constructor(private conexionServ : UsuariosSerService, private router:Router, private regresar:Router) { }
 
   ngOnInit() {
-    this.user =[]
-
-    this.user =[
-      {
-        Id:1,
-        Numero:10,
-        Nombre:'Ricardo',
-        Descripcion:'pruebas',
-        Default:12,
-      },{
-        Id:2,
-        Numero:10,
-        Nombre:'Ricardo',
-        Descripcion:'pruebas',
-        Default:12,
-      }
-
-    ]
-    console.log('arreglo',this.user)
+    this.getUsuarios()
   }
 
   metodo(){
@@ -55,6 +37,21 @@ user:UsuariosModel[]= [];
   //
   newUsuario(){
     this.router.navigate(['/user/act'])
+  }
+
+  getUsuarios(){
+    this.conexionServ.getUsuarios().subscribe((res: any)=>{
+      if(res.status==200){
+        console.log('Respueta del back',res)
+        this.user=res.response;
+      }else{
+        this.user=[]
+        alert('algo salio mal')
+      }
+
+
+
+     })
   }
 
 }

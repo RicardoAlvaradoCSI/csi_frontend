@@ -28,9 +28,11 @@
       </div>
     </div>
     <div class="col-py-3,col-md"> .
-      <button type="button" class="btn btn-primary"  routerLink="">Regresar</button>
-      <button  type="button" class="btn btn-primary">Guardar</button>
+      <button type="button" class="btn btn-danger"  routerLink="" *ngIf="idSistema==0"><i class="fa fa-arrow-left" aria-hidden="true" ></i> Regresar</button>
+      <button  type="button" class="btn btn-primary" (click)="validaCreacion()">Guardar</button>
     </div>
   </div>
+
+
 
 </div>

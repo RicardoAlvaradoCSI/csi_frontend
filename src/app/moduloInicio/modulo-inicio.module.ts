@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
-  ]
+  ],
+  entryComponents:[Actividad2Component]
 })
 export class ModuloInicioModule { }

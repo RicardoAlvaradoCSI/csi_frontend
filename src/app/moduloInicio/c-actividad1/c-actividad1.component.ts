@@ -2,6 +2,9 @@ import { UsuariosModel } from './../../modelos/tblActividad1.model';
 import { Component, OnInit } from '@angular/core';
 import { UsuariosSerService } from 'src/app/Servicios/usuarios-ser.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Actividad2Component } from '../actividad2/actividad2.component';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-c-actividad1',
@@ -11,25 +14,17 @@ import { Router } from '@angular/router';
 export class CActividad1Component implements OnInit {
 
 user:UsuariosModel[]= [];
+newUser = new UsuariosModel();
 
 //newUser = new UsuariosModel();
 
-  constructor(private conexionServ : UsuariosSerService, private router:Router, private regresar:Router) { }
+  constructor(private conexionServ : UsuariosSerService, private router:Router, private regresar:Router, private modalService: NgbModal ) { }
 
   ngOnInit() {
     this.getUsuarios()
   }
 
-  metodo(){
-   /* console.log('entre al met');
-    console.log('Este es el numero', this.newUser);
-
-    this.conexionServ.newUser(this.user).subscribe((res: any)=>{
-      if(res.status == 200){
-        console.log('resp' , res.response);
-      }else{
-      }
-    })*/
+  metodoRegresar(){
     this.regresar.navigate(['/user'])
 
   }
@@ -42,16 +37,40 @@ user:UsuariosModel[]= [];
   getUsuarios(){
     this.conexionServ.getUsuarios().subscribe((res: any)=>{
       if(res.status==200){
-        console.log('Respueta del back',res)
+       // console.log('Respuesta del back',res)
+
         this.user=res.response;
       }else{
         this.user=[]
-        alert('algo salio mal')
       }
-
-
-
      })
   }
+
+  verUsuarios(user:any){
+    var idSistem = 1;
+
+    // this.newUser = user;
+    const modalRef = this.modalService.open(Actividad2Component, {
+      backdrop: 'static',
+      keyboard: false,
+      centered: true,
+      size: 'xl' as any,
+      // backdrop: false,
+    });
+    modalRef.componentInstance.setUsuarios(user, idSistem);
+    modalRef.result.then(result => {
+      if (result == 1) {
+      }
+    }).catch(error => {
+    });
+  }
+
+
+  alerta(){
+    Swal.fire('Atencion','Esta es una alerta','success')
+  }
+
+
+
 
 }

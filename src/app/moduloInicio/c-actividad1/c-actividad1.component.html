@@ -13,6 +13,8 @@
               <th scope="col">Nombre</th>
               <th scope="col">Descripción</th>
               <th scope="col">Default</th>
+              <th scope="col"></th>
+
             </tr>
           </thead>
           <tbody>
@@ -22,6 +24,8 @@
               <td>{{ item.Nombre }}</td>
               <td>{{ item.Descripcion }}</td>
               <td>{{ item.Default }}</td>
+              <td><em class="fa fa-pencil-square-o" style="cursor: pointer;" (click)="verUsuarios(item)"></em></td>
+
             </tr>
           </tbody>
         </table>
@@ -29,7 +33,50 @@
 
     </div>
     <div class="col py-2" style="text-align: right;">
+      <button  type="button" class="btn btn-primary" (click)="alerta()" >Alerta</button>
       <button  type="button" class="btn btn-primary" (click)="newUsuario()" >Agregar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md">
+            <label for="" class="col-sm-2 col-form-label">Numero</label>
+            <input type="number" [(ngModel)]="newUser.Numero"  class="form-control" id="nombre" placeholder="Ingrese Numero">
+          </div>
+
+          <div class="col-md">
+            <label for="" class="col-sm-2 col-form-label">Nombre</label>
+            <input type="text" [(ngModel)]="newUser.Nombre" class="form-control" id="nombre" placeholder="Ingrese Nombre">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md">
+            <label for="" class="col-sm-2 col-form-label">Descripcion</label>
+            <input type="text"  [(ngModel)]="newUser.Descripcion"  class="form-control" id="Descripcion" placeholder="Ingrese Descripcion">
+          </div>
+          <div class="col-md">
+            <label for="" class="col-sm-2 col-form-label">Default</label>
+            <input type="number"  [(ngModel)]="newUser.Default"  class="form-control" id="Default" placeholder="Ingrese Default">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>

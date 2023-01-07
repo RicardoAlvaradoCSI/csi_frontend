@@ -17,7 +17,7 @@ export class UsuariosSerService {
 
     console.log('user', user);
 
-    return this.http.post(this.api+'/newUser',user);
+    return this.http.post(this.api+'/newprueba1',user);
   }
 
   getUsuarios():Observable<any>{

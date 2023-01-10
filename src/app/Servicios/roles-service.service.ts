@@ -1,28 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuariosSerService {
+export class RolesServiceService {
 
   constructor(private http : HttpClient) { }
-
-
   private api: string = `${environment.keyBack}`;
 
-  newUser(user:any):Observable<any>{
-
-    console.log('user', user);
-    return this.http.post(this.api+'/newprueba1',user);
-  }
-
-  getUsuarios():Observable<any>{
+  getRoles():Observable<any>{
     return this.http.get(this.api+'/roles');
   }
-
-  //private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 }

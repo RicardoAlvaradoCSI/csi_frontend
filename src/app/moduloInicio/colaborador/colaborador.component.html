@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="card">
+    <div class="card-header text-center" NG>
+      <label for=""> ALTA DE REGISTROS </label>
+    </div>
+    <div class="card-body">
+      <!-- <form [formGroup]="newForm1"> -->
+      <div class="row">
+        <div class="col-md-6">
+          <label for="" class="">Nombre</label>
+          <input type="text" [(ngModel)]="newColaborador1.nombre" class="form-control" id="nombre"
+            placeholder="Ingrese Nombre">
+        </div>
+        <div class="col-md-6">
+          <label for="" class="">Seleccionar Rol</label>
+          <ng-select [(ngModel)]="newColaborador1.id_rol" placeholder="Seleccione una opcion" [items]="selectRoles"
+            bindLabel="nombre" bindValue="id"  [clearable]="false"></ng-select>
+        </div>
+      </div>
+      <div class="row py-3" >
+        <div class="col-md-4">
+          <input type="file" class="form-control"   name="" id="" accept=".pdf,.jgp,.png" (change)="seleccionarArchivoAV($event)">
+        </div>
+      </div>
+    </div>
+    <div class="row py-3" >
+      <div class="col-md-5">
+
+        <!-- </form> -->
+
+      </div>
+      <div class="col-py-3,col-md">
+        <button type="button" class="btn btn-primary" (click)="setColaborador()">Guardar</button>
+      </div>
+    </div>
+  </div>

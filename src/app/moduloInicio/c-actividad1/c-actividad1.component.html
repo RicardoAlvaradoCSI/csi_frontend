@@ -1,8 +1,18 @@
+<!--<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#ffffff" type="ball-clip-rotate" [fullScreen]="true">
+  <p style="color: white"> Cargando, por favor espere </p>
+</ngx-spinner>
+
+-->
+
+
+
+
 <div class="row">
   <div class="card">
     <div class="card-header text-center">
       <label for="">LISTADO DE REGISTROS</label>
     </div>
+
     <div class="card-body">
       <div class="row">
         <table class="table">
@@ -33,8 +43,8 @@
 
     </div>
     <div class="col py-2" style="text-align: right;">
-      <button  type="button" class="btn btn-primary" (click)="alerta()" >Alerta</button>
-      <button  type="button" class="btn btn-primary" (click)="newUsuario()" >Agregar</button>
+      <button type="button" class="btn btn-primary" (click)="alerta()">Alerta</button>
+      <button type="button" class="btn btn-primary" (click)="newUsuario()">Agregar</button>
     </div>
   </div>
 </div>
@@ -43,6 +53,8 @@
 
 
 <!-- Modal -->
+
+<!--
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -54,22 +66,26 @@
         <div class="row">
           <div class="col-md">
             <label for="" class="col-sm-2 col-form-label">Numero</label>
-            <input type="number" [(ngModel)]="newUser.Numero"  class="form-control" id="nombre" placeholder="Ingrese Numero">
+            <input type="number" [(ngModel)]="newUser.Numero" class="form-control" id="nombre"
+              placeholder="Ingrese Numero">
           </div>
 
           <div class="col-md">
             <label for="" class="col-sm-2 col-form-label">Nombre</label>
-            <input type="text" [(ngModel)]="newUser.Nombre" class="form-control" id="nombre" placeholder="Ingrese Nombre">
+            <input type="text" [(ngModel)]="newUser.Nombre" class="form-control" id="nombre"
+              placeholder="Ingrese Nombre">
           </div>
         </div>
         <div class="row">
           <div class="col-md">
             <label for="" class="col-sm-2 col-form-label">Descripcion</label>
-            <input type="text"  [(ngModel)]="newUser.Descripcion"  class="form-control" id="Descripcion" placeholder="Ingrese Descripcion">
+            <input type="text" [(ngModel)]="newUser.Descripcion" class="form-control" id="Descripcion"
+              placeholder="Ingrese Descripcion">
           </div>
           <div class="col-md">
             <label for="" class="col-sm-2 col-form-label">Default</label>
-            <input type="number"  [(ngModel)]="newUser.Default"  class="form-control" id="Default" placeholder="Ingrese Default">
+            <input type="number" [(ngModel)]="newUser.Default" class="form-control" id="Default"
+              placeholder="Ingrese Default">
           </div>
         </div>
       </div>
@@ -80,5 +96,4 @@
     </div>
   </div>
 </div>
-
-
+-->

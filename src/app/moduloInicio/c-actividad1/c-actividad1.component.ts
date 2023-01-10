@@ -1,10 +1,11 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UsuariosModel } from './../../modelos/tblActividad1.model';
 import { Component, OnInit } from '@angular/core';
 import { UsuariosSerService } from 'src/app/Servicios/usuarios-ser.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Actividad2Component } from '../actividad2/actividad2.component';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-c-actividad1',
@@ -18,7 +19,7 @@ newUser = new UsuariosModel();
 
 //newUser = new UsuariosModel();
 
-  constructor(private conexionServ : UsuariosSerService, private router:Router, private regresar:Router, private modalService: NgbModal ) { }
+  constructor(private conexionServ : UsuariosSerService, private router:Router, private regresar:Router, private modalService: NgbModal ,private spinner: NgxSpinnerService,) { }
 
   ngOnInit() {
     this.getUsuarios()
@@ -35,14 +36,17 @@ newUser = new UsuariosModel();
   }
 
   getUsuarios(){
+    this.spinner.show();
     this.conexionServ.getUsuarios().subscribe((res: any)=>{
       if(res.status==200){
        // console.log('Respuesta del back',res)
 
         this.user=res.response;
+
       }else{
         this.user=[]
       }
+      // this.spinner.h
      })
   }
 

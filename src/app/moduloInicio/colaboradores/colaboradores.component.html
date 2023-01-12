@@ -11,22 +11,18 @@
             <li class="nav-item">
               <a aria-controls="user" aria-selected="true" class="nav-link {{ visto == true ?activarTable : ''}}"
                 data-bs-toggle="tab" href="#user" id="user-tab" role="tab"
-                [ngStyle]="{'color': visto == true ? 'red' : ''}" (click)="ver()"> <i class="fa fa-envelope-o fa-lg"></i>
-                USUARIOS ({{contUser}})</a>
+                [ngStyle]="{'color': visto == true ? 'red' : ''}" (click)="ver()"> <i
+                  class="fa fa-envelope-o fa-lg"></i>
+                Colaboradores ({{contUser}})</a>
             </li>
 
-            <li class="nav-item">
-              <a aria-controls="pendientes1" aria-selected="true" class="nav-link {{ visto2 == true ?activarTable : ''}}"
-                data-bs-toggle="tab" href="#pendientes1" id="pendientes1-tab" role="tab"
-                [ngStyle]="{'color': visto2 == true ? 'red' : ''}" (click)="ver2()"> <i class="fa fa-envelope-o fa-lg"></i>
-                PENDIENTES</a>
-            </li>
 
             <li class="nav-item">
               <a aria-controls="listado" aria-selected="true" class="nav-link {{ visto3 == true ?activarTable : ''}}"
                 data-bs-toggle="tab" href="#listado" id="listado-tab" role="tab"
-                [ngStyle]="{'color': visto3 == true ? 'red' : ''}" (click)="ver3()"> <i class="fa fa-envelope-o fa-lg"></i>
-                LISTAS</a>
+                [ngStyle]="{'color': visto3 == true ? 'red' : ''}" (click)="ver3()"> <i
+                  class="fa fa-envelope-o fa-lg"></i>
+                Listas</a>
             </li>
           </ul>
         </div>
@@ -36,10 +32,10 @@
       <div class="tab-content" id="myTabContent">
         <div aria-labelledby="user-tab" class="tab-pane fade show active" id="user" role="tabpanel">
           <div class="row">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
+            <table class="table" >
+              <thead style="text-align: center; background-color: rgb(210, 211, 211);">
+                <tr style="text-align: left;">
+                  <th scope="col" >ID</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Departamento</th>
                   <th scope="col">Artichivo</th>
@@ -47,7 +43,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of mostrarColaboradores">
+                <tr style="text-align: left;" *ngFor="let item of mostrarColaboradores">
                   <td>{{ item.id }}</td>
                   <td>{{ item.nombre }}</td>
                   <td>{{ item.departamento }}</td>
@@ -56,19 +52,15 @@
                     <em class="fa fa-pencil-square-o" style="cursor: pointer;" ngbTooltip="Editar"
                       (click)="verUsuarios(item)"></em>
                     <em class="fa fa-trash-o fa-lg" style="cursor: pointer; color: red;" ngbTooltip="Eliminar"></em>
-
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
-        <div aria-labelledby="pendientes1-tab" class="tab-pane fade show " id="pendientes1" role="tabpanel">
-          <div class="row">
 
-            <label>
-              texto 1
-            </label>
+          <div class="col py-2" style="text-align: right;">
+            <button type="button" class="btn btn-primary" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Nuevo</button>
           </div>
         </div>
 
@@ -80,13 +72,13 @@
                 <div class="card-header text-center">
                   <label for=""> ALTA DE REGISTROS </label>
                 </div>
-                <div class="card-body" >
+                <div class="card-body">
                   <!-- <form [formGroup]="newForm1"> -->
                   <div class="row">
                     <div class="col-md-5">
                       <div class="col-md-12">
                         <label for="" class="">Nombre</label>
-                        <input type="text" class="form-control"  [(ngModel)]="newLista.nombre" id="nombre"
+                        <input type="text" class="form-control" [(ngModel)]="newLista.nombre" id="nombre"
                           placeholder="Ingrese Nombre">
                       </div>
                       <div class="col-md-12">
@@ -96,11 +88,8 @@
                       </div>
                       <div class="col-md-12">
                         <label for="" class="">Equipo</label>
-                        <input type="text" class="form-control" [(ngModel)]="newLista.equipo"  id="Equipo"
-                          placeholder="Ingrese Equipo">
+                        <input type="text" class="form-control" [(ngModel)]="newLista.equipo" id="Equipo" placeholder="Ingrese Equipo">
                       </div>
-
-
                     </div>
                     <div class="col-md-1">
 
@@ -109,7 +98,7 @@
 
                     <div class="col-md">
                       <div class="row">
-                        <table class="table table-hover  "  >
+                        <table class="table table-hover  ">
                           <thead style="background-color: bisque">
                             <tr>
                               <th scope="col">Nombre</th>
@@ -118,15 +107,13 @@
                               <th></th>
                             </tr>
                           </thead>
-                          <tbody >
+                          <tbody>
                             <tr *ngFor="let item of mostrarLista">
                               <td>{{ item.nombre }}</td>
                               <td>{{ item.numero }}</td>
                               <td>{{ item.equipo }}</td>
                               <td>
-
-                                <em class="fa fa-trash-o fa-lg" (click)="elimarElementosListas(item)"></em>
-
+                                <em class="fa fa-trash-o fa-lg" ngbTooltip="Eliminar" (click)="elimarElementosListas(item)"></em>
                               </td>
                               <!-- <td>
                                 <em class="fa fa-pencil-square-o" style="cursor: pointer;" ngbTooltip="Editar"
@@ -153,7 +140,7 @@
                   </div> -->
                 </div>
 
-                <div class="row py-3" >
+                <div class="row py-3">
                   <div class="col-md-5">
 
                     <!-- </form> -->
@@ -166,50 +153,188 @@
 
                   <div class="col-py-3,col-md-6">
                     <button type="button" class="btn btn-primary" (click)="addLista()">Agregar</button>
-                  </div> -->
+                  </div>
 
-
+                  <div class="col py-2" style="text-align: right;">
+                    <button type="button" class="btn btn-primary" (click)="guardarListas()">Guardar</button>
+                  </div>
 
                 </div>
               </div>
 
 
+            </div>
           </div>
+
         </div>
 
-      </div>
 
 
 
-      <div class="col py-2" style="text-align: right;">
-        <button type="button" class="btn btn-primary" (click)="guardarListas()">Guardar</button>
-      </div>
 
 
-      <!-- <div class="col py-2" style="text-align: right;">
 
-        <button type="button" class="btn btn-primary" (click)="newColaborador()">Guardar</button>
-      </div> -->
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="archivoAdjunto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">{{ nomUser }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body ">
-        <iframe name="iFrameADJNAFEC" style="height:75vh; width: 100%;" title="iFrame"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="archivoAdjunto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{ nomUser }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+          <iframe name="iFrameADJNAFEC" style="height:75vh; width: 100%;" title="iFrame"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+          <!-- Modal -->
+
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"> Nuevo Colaborador</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="">
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a aria-controls="info" aria-selected="true" class="nav-link {{ info_C == true ?activarTable : ''}}"
+                            data-bs-toggle="tab" href="#info" id="info-tab" role="tab"
+                            [ngStyle]="{'color': info_C == true ? 'red' : ''}" (click)="agregarInfo_Colaborador()"> <i
+                              class="fa fa-envelope-o fa-lg"></i>
+                            Información</a>
+                        </li>
+                        <li class="nav-item" [hidden]="!activaTab">
+                          <a aria-controls="Documentos" aria-selected="true" class="nav-link {{ doc_C == true ?activarTable : ''}}"
+                            data-bs-toggle="tab" href="#Documentos" id="Documentos-tab" role="tab"
+                            [ngStyle]="{'color': doc_C == true ? 'red' : ''}" (click)="documentos_Colaborador()"> <i
+                              class="fa fa-envelope-o fa-lg"></i>
+                            Documentos</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="tab-content" id="myTabContent">
+                      <div aria-labelledby="info-tab" class="tab-pane fade show active" id="info" role="tabpanel">
+                        <div class="row">
+                          <div class="col-md-5">
+                            <div class="col-md-12">
+                              <label for="" class="col-sm-2 col-form-label">Número</label>
+                              <input type="number"  class="form-control" id="nombre"
+                                placeholder="Ingrese Número" [(ngModel)]="newColaborador1.numero">
+                            </div>
+                            <div class="col-md-12">
+                              <label for="" class="col-sm-2 col-form-label">Nombre</label>
+                              <input type="text"  class="form-control" id="nombre"
+                                placeholder="Ingrese Nombre" [(ngModel)]="newColaborador1.nombre">
+                            </div>
+                            <div class="col-md-12">
+                              <label for="" class="">Seleccionar Rol</label>
+                              <ng-select [(ngModel)]="newColaborador1.id_rol" placeholder="Seleccione una opcion" [items]="selectRoles"
+                                bindLabel="nombre" bindValue="id"  [clearable]="false"></ng-select>
+                            </div>
+                          </div>
+                          <div class="col-md-1"></div>
+
+                          <div class="col-md-6">
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="" class="col-sm-2 col-form-label">Descripción</label>
+                              <input type="text" class="form-control" id="Descripcion"
+                                placeholder="Ingrese Descripción" [(ngModel)]="newColaborador1.Descripcion">
+                            </div>
+                            <div class="col-md-12">
+                              <label for="" class="col-sm-2 col-form-label">Default</label>
+                              <input type="number"  class="form-control" id="Default"
+                                placeholder="Ingrese Número" [(ngModel)]="newColaborador1.Default">
+                            </div>
+                            <div class="row py-3" >
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" [(ngModel)]="activaTab" type="checkbox" role="switch" id="checkDoc">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Adjuntar archivos</label>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                        <div aria-labelledby="Documentos-tab" class="tab-pane fade show" id="Documentos" role="tabpanel">
+                          <div class="row ">
+
+                          </div>
+                          <div class="row">
+                            <div class="col-md"  >
+                              <div class="col-md-12" >
+                                <table class="table table-hover  " >
+                                  <thead>
+                                    <tr>
+                                      <th colspan="2" style="text-align: center; background-color: rgb(210, 211, 211);">Archivos</th>
+                                    </tr>
+                                    <tr>
+                                      <th scope="col" style="text-align: center;"></th>
+                                      <th></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngIf="newColaborador1.doc_index.length==0">
+                                      <td colspan="2" class="text-center">
+                                        <label for="">Sin registros</label>
+                                      </td>
+                                    </tr>
+                                    <tr  *ngFor="let archivo of this.newColaborador1.doc_index">
+                                      <td colspan="1" >{{archivo.nombre}}</td>
+                                      <td colspan="1" >
+                                        <em class="fa fa-trash-o fa-lg" (click)="elimarArchivosListas(archivo)" style="cursor: pointer;" ngbTooltip="Eliminar"></em>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="row py-3" >
+                              <div class="col-md-6">
+                                <input type="file" class="form-control"   name="" id="" accept=".pdf,.jpeg,.png" (change)="seleccionarArchivoAV($event)">
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                    </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary" (click)="setColaborador()">Guardar</button>
+                </div>
+
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+           </div>
+
+
+

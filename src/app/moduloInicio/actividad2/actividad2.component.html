@@ -38,7 +38,7 @@
     </div>
     <div class="col-py-3,col-md"> .
       <button type="button" class="btn btn-danger"  routerLink="" *ngIf="idSistema==0"><i class="fa fa-arrow-left" aria-hidden="true" ></i> Regresar</button>
-      <button  type="button" class="btn btn-primary" (click)="validaCreacion()">Guardar</button>
+      <button  type="button" class="btn btn-primary" (click)="validaCreacion()" [disabled]="!newForm1.valid">Guardar</button>
     </div>
   </div>
 

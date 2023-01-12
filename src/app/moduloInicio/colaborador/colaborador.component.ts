@@ -1,12 +1,12 @@
 
-import { roles } from './../../modelos/tblActividad1.model';
+import { roles } from '../../modelos/tblActividad1.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RolesServiceService } from 'src/app/Servicios/roles-service.service';
 import Swal from "sweetalert2";
 
 import { ColaboradorService } from 'src/app/Servicios/colaborador.service';
-import { Colaboradores } from "./../../modelos/tblActividad1.model";
+import { Colaboradores } from "../../modelos/tblActividad1.model";
 
 
 class Archivo{
@@ -46,10 +46,9 @@ archivo = new Archivo();
 
     // this.newColaborador1.folio = '1';
     this.newColaborador1.departamento = '1';
-    this.newColaborador1.doc_index = '';
 
-    this.newColaborador1.doc_index = this.archivo.nombreArchivo;
-    this.newColaborador1.image = this.archivo.base64textString;
+    // this.newColaborador1.doc_index = this.archivo.nombreArchivo;
+    // this.newColaborador1.image = this.archivo.base64textString;
 
     this.conexionServC.newColaborador(this.newColaborador1).subscribe((res: any) => {
       console.log("respuesta",res);
@@ -83,6 +82,13 @@ archivo = new Archivo();
   _handleReaderLoadedAV(readerEvent) {
     var binaryString = readerEvent.target.result;
     this.archivo.base64textString = btoa(binaryString);
+    this.pushArchivos();
+  }
+
+  pushArchivos(){
+    this.newColaborador1.doc_index.push(this.archivo);
+    this.archivo = new Archivo();
+    console.log("doc inndex archivos",this.newColaborador1.doc_index);
   }
 
 

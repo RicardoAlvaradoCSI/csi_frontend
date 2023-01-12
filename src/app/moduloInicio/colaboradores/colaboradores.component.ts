@@ -1,11 +1,17 @@
-import { AddObjetosService } from './../../Servicios/add-objetos.service';
+import { AddObjetosService } from '../../Servicios/add-objetos.service';
 import { ColaboradorService } from 'src/app/Servicios/colaborador.service';
-import { Colaboradores, listas } from './../../modelos/tblActividad1.model';
+import { Colaboradores, listas } from '../../modelos/tblActividad1.model';
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 import { Router } from '@angular/router';
+import { roles } from '../../modelos/tblActividad1.model';
+import { RolesServiceService } from 'src/app/Servicios/roles-service.service';
 declare var $
 
+class Archivo{
+  nombre?:string;
+  base64?:string;
+}
 @Component({
   selector: 'app-colaboradores',
   templateUrl: './colaboradores.component.html',
@@ -17,20 +23,28 @@ export class ColaboradoresComponent implements OnInit {
   mostrarColaboradores:Colaboradores[]= [];
   mostrarLista:listas[]= [];
   newLista = new listas();
+  selectRoles:roles[]= [];
+  newColaborador1 = new Colaboradores();
+  archivo = new Archivo();
 
 
   nomUser = '';
   visto = true;
   visto2 = false;
   visto3 = false;
+  visto4 = false;
+  info_C = true;
+  doc_C = false;
+  activaTab= false;
 
 
   contUser = 0
 
-  constructor( private router:Router,private conexionServ : ColaboradorService, private conexcioServListas: AddObjetosService ) { }
+  constructor( private router:Router,private conexionServ : ColaboradorService, private conexcioServListas: AddObjetosService,private conexionServC : ColaboradorService,private conexionServRol : RolesServiceService ) { }
 
   ngOnInit() {
     this.verListaColaboradores();
+    this.getRoles();
   }
 
   // changeSelect(e:any){
@@ -85,6 +99,26 @@ export class ColaboradoresComponent implements OnInit {
     this.visto2 = false;
     this.visto = false;
   }
+  ver4(){
+    this.visto4 = true;
+    this.visto3 = false;
+    this.visto2 = false;
+    this.visto = false;
+  }
+
+  agregarInfo_Colaborador(){
+    this.info_C = true;
+    this.doc_C = false;
+  }
+
+  documentos_Colaborador(){
+    this.info_C = false;
+    this.doc_C = true;
+  }
+
+
+
+
 
   addLista(){
 
@@ -102,17 +136,10 @@ export class ColaboradoresComponent implements OnInit {
 
   }
 
-
-
-
   elimarElementosListas(fila){
-
     var ii = this.mostrarLista.indexOf(fila);
     this.mostrarLista.splice(ii, 1);
-
    console.log("eliminandolista",this.mostrarLista);
-
-
   }
 
 
@@ -123,8 +150,75 @@ export class ColaboradoresComponent implements OnInit {
       console.log('sd',res);
 
     });
+    }
 
 
-  }
+
+    seleccionarArchivoAV(event) {
+      var files = event.target.files;
+      var file = files[0];
+      this.archivo.nombre = file.name;
+      if (files && file) {
+        var reader = new FileReader();
+        reader.onload = this._handleReaderLoadedAV.bind(this);
+        reader.readAsBinaryString(file);
+      }
+    }
+
+    _handleReaderLoadedAV(readerEvent) {
+      var binaryString = readerEvent.target.result;
+      this.archivo.base64 = btoa(binaryString);
+      this.pushArchivos();
+    }
+
+
+    pushArchivos(){
+      this.newColaborador1.doc_index.push(this.archivo);
+      this.archivo = new Archivo();
+      console.log("doc inndex archivos",this.newColaborador1.doc_index);
+    }
+
+    elimarArchivosListas(fila){
+      var ii = this.newColaborador1.doc_index.indexOf(fila);
+      this.newColaborador1.doc_index.splice(ii, 1);
+     console.log("eliminandolista",this.newColaborador1.doc_index);
+    }
+
+
+    setColaborador(){
+
+      // this.newColaborador1.folio = '1';
+      this.newColaborador1.departamento = '1';
+
+      // this.newColaborador1.doc_index = this.archivo.nombreArchivo;
+      // this.newColaborador1.image = this.archivo.base64textString;
+
+      console.log("newC",this.newColaborador1);
+
+
+      this.conexionServC.newColaborador(this.newColaborador1).subscribe((res: any) => {
+        console.log("respuesta",res);
+
+        if (res.status == 200) {
+          Swal.fire("Alerta", "El usuario se registro correctamente", "success");
+          console.log("resp", res.response);
+        } else {
+          Swal.fire("Alerta", "Algo salio mal", "error");
+
+        }
+        // this.spinner.hide();
+      });
+
+    }
+
+
+    getRoles(){
+       this.conexionServRol.getRoles().subscribe((res: any)=>{
+        console.log("ddf",res);
+          this.selectRoles=res.response;
+          console.log("imp",this.selectRoles);
+       })}
+
+
 
 }

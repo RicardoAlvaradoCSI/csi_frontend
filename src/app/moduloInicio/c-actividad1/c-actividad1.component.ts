@@ -36,13 +36,11 @@ newUser = new UsuariosModel();
   }
 
   getUsuarios(){
-    this.spinner.show();
+    // this.spinner.show();
     this.conexionServ.getUsuarios().subscribe((res: any)=>{
       if(res.status==200){
        // console.log('Respuesta del back',res)
-
         this.user=res.response;
-
       }else{
         this.user=[]
       }
@@ -50,9 +48,9 @@ newUser = new UsuariosModel();
      })
   }
 
+
   verUsuarios(user:any){
     var idSistem = 1;
-
     // this.newUser = user;
     const modalRef = this.modalService.open(Actividad2Component, {
       backdrop: 'static',

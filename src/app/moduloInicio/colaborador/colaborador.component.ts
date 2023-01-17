@@ -1,3 +1,4 @@
+import { LoginService } from './../../Servicios/login.service';
 
 import { roles } from '../../modelos/tblActividad1.model';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +21,7 @@ class Archivo{
 })
 export class ColaboradorComponent implements OnInit {
 
-archivo = new Archivo();
+  archivo = new Archivo();
   selectNombre : string;
   selectRoles:roles[]= [];
   newColaborador1 = new Colaboradores();
@@ -32,8 +33,6 @@ archivo = new Archivo();
     }
 
 
-
-
   getRoles(){
 
     this.conexionServ.getRoles().subscribe((res: any)=>{
@@ -42,8 +41,9 @@ archivo = new Archivo();
         console.log("imp",this.selectRoles);
      })
   }
-  setColaborador(){
 
+
+  setColaborador(){
     // this.newColaborador1.folio = '1';
     this.newColaborador1.departamento = '1';
 
@@ -90,6 +90,8 @@ archivo = new Archivo();
     this.archivo = new Archivo();
     console.log("doc inndex archivos",this.newColaborador1.doc_index);
   }
+
+
 
 
 

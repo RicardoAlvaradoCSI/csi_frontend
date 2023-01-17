@@ -14,6 +14,8 @@ export class Colaboradores {
   id_rol?: number;
   folio?:string;
   image?:string;
+  correo:string;
+
 
   constructor(){
     this.doc_index = [];

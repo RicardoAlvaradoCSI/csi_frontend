@@ -1,0 +1,87 @@
+<div class="row position-absolute top-50 start-50 translate-middle">
+  <div class="card ">
+    <div class="card-header text-center" >
+      <label for=""> Inicio Sesión </label>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3" style="text-align: right;">
+              <label for="" class=""> <strong>Usuario: </strong> </label>
+            </div>
+            <div class="col-md-9">
+              <input type="text"  class="form-control" id="user"
+              placeholder="Ingrese Usuario" [(ngModel)]="user">
+            </div>
+          </div>
+          <div class="row py-3">
+            <div class="col-md-3" style="text-align: right;">
+              <label><strong>Contraseña:</strong> </label>
+            </div>
+            <div class="col-md-9">
+              <input type="password"  class="form-control" id="pass" placeholder="Ingrese Contraseña" [(ngModel)]="pass">
+              <div class="d-md-flex justify-content-md-end py-3"  >
+                <div class="col-py-3,col-md-6">
+                  <button type="button" class="btn btn-link py-4" data-bs-target="#modalRecuperaPassword" data-bs-toggle="modal">Olvide mi contraseña</button>
+                  <button type="button" class="btn btn-success" (click)="sesion()">Entrar</button>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalRecuperaPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-md modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header" >
+      <h5 class="modal-title" id="staticBackdropLabel" >Recuperar contraseña</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body ">
+      <!-- <iframe name="iFrameADJNAFEC" style="height:20vh; width: 100%;" title="iFrame"> -->
+        <div class="row">
+          <div class="card">
+            <div class="card-body">
+              <div class="row" *ngIf="verOpciones == true">
+                <div class="col-md" *ngIf="obtCodigo == true">
+                  <button type="button" class="btn btn-link py-4"  (click)="obtener_Codigo()" >Obtener código</button>
+                </div>
+                <div class="col-md" *ngIf="envCodigo == true">
+                  <button type="button" class="btn btn-link py-4" (click)="enviar_Codigo()" >Enviar código</button>
+                </div>
+              </div>
+
+                <div class="col-md-12"  *ngIf="obtenerCodigo == true">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Ingrese e-mail" aria-label="mail" aria-describedby="basic-addon1" [(ngModel)]="correo" >
+                    <button type="button" class="btn btn-success" ><i class="fa fa-paper-plane-o" aria-hidden="true" (click)="enviar_correo()" > Eviar</i></button>
+                  </div>
+                </div>
+                <div class="col-md-12"  *ngIf="validaCodigo == true" >
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Ingrese codigo" aria-label="clave" aria-describedby="basic-addon1" [(ngModel)]="tokenValida">
+                    <button type="button" class="btn btn-success" ><i class="fa fa-paper-plane-o" aria-hidden="true" (click)="validar_Codigo()" > Validar Código</i></button>
+                  </div>
+                </div>
+                <div class="col-md-12"  *ngIf="nuevaClave == true">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Ingrese e-mail" aria-label="mailr" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Ingrese nueva contraseña" aria-label="pass" aria-describedby="basic-addon1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
+</div>

@@ -12,10 +12,11 @@ import { ColaboradoresComponent } from './colaboradores/colaboradores.component'
 import { RolesComponent } from './roles/roles.component';
 import { ColaboradorComponent } from './colaborador/colaborador.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
-  declarations: [CActividad1Component, Actividad2Component, ColaboradoresComponent, RolesComponent, ColaboradorComponent],
+  declarations: [CActividad1Component, Actividad2Component, ColaboradoresComponent, RolesComponent, ColaboradorComponent, LoginComponent],
   imports: [
     CommonModule,
     ModuloInicioRoutingModule,

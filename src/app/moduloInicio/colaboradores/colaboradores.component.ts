@@ -1,4 +1,4 @@
-import { LoginService } from './../../Servicios/login.service';
+import { LoginService } from "./../../Servicios/login.service";
 import { AddObjetosService } from "../../Servicios/add-objetos.service";
 import { ColaboradorService } from "src/app/Servicios/colaborador.service";
 import { Colaboradores, listas } from "../../modelos/tblActividad1.model";
@@ -19,15 +19,17 @@ class Archivo {
   styleUrls: ["./colaboradores.component.css"],
 })
 export class ColaboradoresComponent implements OnInit {
+  idDoc : number;
   activarTable = "active";
   mostrarColaboradores: Colaboradores[] = [];
+  allCols: Colaboradores[] = [];
   mostrarLista: listas[] = [];
   newLista = new listas();
   selectRoles: roles[] = [];
   newColaborador1 = new Colaboradores();
   archivo = new Archivo();
-  pass="";
-  tipoBtnVerClave="password";
+  pass = "";
+  tipoBtnVerClave = "password";
 
   nomUser = "";
   visto = true;
@@ -37,9 +39,17 @@ export class ColaboradoresComponent implements OnInit {
   info_C = true;
   doc_C = false;
   activaTab = false;
-  sesionUsuario : any;
+  modalRole = true;
+  modalColaboradores=true;
+
+
+
 
   contUser = 0;
+  userlogiado: any;
+
+  selectUser: number;
+  selectDepto: number;
 
   constructor(
     private router: Router,
@@ -48,20 +58,19 @@ export class ColaboradoresComponent implements OnInit {
     private conexionServC: ColaboradorService,
     private conexionServRol: RolesServiceService,
     private rutaP: ActivatedRoute,
-    private conSerSesion : LoginService
+    private conSerSesion: LoginService
   ) {}
 
   ngOnInit() {
+    // if (this.conSerSesion.isAuthenticated()) {
+    //   Swal.fire('Login', `Hola ${this.conSerSesion._user.nombre} ya has iniciado sesión.`, 'info');
+    //   this.router.navigate(['user/colaboradores']);
+    // }
+    this.userlogiado = JSON.parse(sessionStorage.getItem("user"));
     this.verListaColaboradores();
     this.getRoles();
-
-    // var parametro = this.rutaP.snapshot.params;
-    this.sesionUsuario = this.rutaP.snapshot.params;
-
-
-    console.log("parametros", this.sesionUsuario);
+    this.getAllCol();
   }
-
 
   // changeSelect(e:any){
   //   console.log("e",e);
@@ -72,24 +81,50 @@ export class ColaboradoresComponent implements OnInit {
   // }
 
   verListaColaboradores() {
-    this.conexionServ.verColaboradores().subscribe((res: any) => {
+
+    var user = '', dpto = '';
+    if(this.selectUser){
+      user = String(this.selectUser);
+    }
+    if(this.selectDepto){
+      dpto = String(this.selectDepto);
+    }
+
+    this.conexionServ.verColaboradores(user,dpto).subscribe((res: any) => {
       this.mostrarColaboradores = res.response;
       this.contUser = this.mostrarColaboradores.length;
       console.log("lista", this.mostrarColaboradores);
     });
   }
+
+  getAllCol(){
+    this.conexionServ.verColaboradores('','').subscribe((res: any) => {
+      this.allCols = res.response;
+    });
+  }
+
+
+
+
+
   newColaborador() {
     this.router.navigate(["/user/colaborador"]);
   }
 
-  verArchivo(idU) {
-    this.nomUser = idU.nombre;
+  verArchivo(item,idU) {
+    this.nomUser = item.nombre;
+    console.log("idU",idU);
+    console.log("item",item);
+
+
+
+
 
     $("#archivoAdjunto").modal("show"); //mostramos el modal
-    this.conexionServ.pdfColaborador(idU.id).subscribe(
-      (response: any) => {
-        console.log("archivos", response);
-        const url = URL.createObjectURL(response);
+    this.conexionServ.pdfColaborador(item.id,idU).subscribe(
+      (res: any) => {
+        console.log("archivos", res);
+        const url = URL.createObjectURL(res);
         window.open(url, "iFrameADJNAFEC");
       },
       (error) => {
@@ -147,7 +182,7 @@ export class ColaboradoresComponent implements OnInit {
       this.mostrarLista.push(this.newLista);
       this.newLista = new listas();
     }
-    console.log("listas", this.mostrarLista);
+    // console.log("listas", this.mostrarLista);
   }
 
   elimarElementosListas(fila) {
@@ -200,7 +235,7 @@ export class ColaboradoresComponent implements OnInit {
 
   setColaborador() {
     // this.newColaborador1.folio = '1';
-    this.newColaborador1.departamento = "1";
+
 
     // this.newColaborador1.doc_index = this.archivo.nombreArchivo;
     // this.newColaborador1.image = this.archivo.base64textString;
@@ -210,7 +245,6 @@ export class ColaboradoresComponent implements OnInit {
     this.conexionServC
       .newColaborador(this.newColaborador1)
       .subscribe((res: any) => {
-        console.log("respuesta", res);
 
         if (res.status == 200) {
           Swal.fire(
@@ -218,7 +252,6 @@ export class ColaboradoresComponent implements OnInit {
             "El usuario se registro correctamente",
             "success"
           );
-          console.log("resp", res.response);
         } else {
           Swal.fire("Alerta", "Algo salio mal", "error");
         }
@@ -228,48 +261,66 @@ export class ColaboradoresComponent implements OnInit {
 
   getRoles() {
     this.conexionServRol.getRoles().subscribe((res: any) => {
-      console.log("ddf", res);
+      // console.log("ddf", res);
       this.selectRoles = res.response;
-      console.log("imp", this.selectRoles);
+      // console.log("imp", this.selectRoles);
     });
   }
 
   cerrar_Sesion() {
 
-    console.log("ressesion",this.sesionUsuario);
-
-     this.conSerSesion.gs_CerrarSesion(this.sesionUsuario.id).subscribe((res:any)=>{
-      console.log("ressesion",this.sesionUsuario);
-      console.log("res",res);
-      if(res.status == 200){
-        this.router.navigate(["/user"]);
-            }
-
-     });
+    this.conSerSesion
+      .gs_CerrarSesion(this.userlogiado.id)
+      .subscribe((res: any) => {
+        if (res.status == 200) {
+          console.log("res", res);
+          this.conSerSesion.logout();
+          this.router.navigate(["/user"]);
+        }
+      });
   }
 
-
-
-
-  cambiar_Clave(){
-    this.conSerSesion.ps_cambiarClave(this.sesionUsuario.id,this.pass).subscribe((res:any)=>{
-      if(res.status ==200){
-        console.log("res",res.status);
-        console.log("pas",this.pass);
-      }
-
-    })
-
+  cambiar_Clave() {
+    this.conSerSesion
+      .ps_cambiarClave(this.userlogiado.id, this.pass)
+      .subscribe((res: any) => {
+        if (res.status == 200) {
+          console.log("res", res.status);
+          console.log("pas", this.pass);
+        }
+      });
   }
 
-
-  verClave(){
-    if(this.tipoBtnVerClave == "password"){
+  verClave() {
+    if (this.tipoBtnVerClave == "password") {
       this.tipoBtnVerClave = "text";
-    }else{
+    } else {
       this.tipoBtnVerClave = "password";
     }
   }
+
+
+
+
+  modalRoles(){
+
+    this.modalColaboradores=true;
+  }
+
+
+  modalRoles1(){
+
+    this.modalColaboradores = false;
+  }
+
+  validar_Codigo(){
+    if(this.token == this.tokenValida){
+
+      this.validaCodigo = false;
+      this.nuevaClave = true;
+    }
+  }
+
 
 
 

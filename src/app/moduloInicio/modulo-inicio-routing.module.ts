@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'',component: LoginComponent},
   {path:'a',component: CActividad1Component},
   {path:'act',component: Actividad2Component},
-  {path:'colaboradores/:id',component: ColaboradoresComponent},
+  {path:'colaboradores',component: ColaboradoresComponent},
   {path:'colaborador',component: ColaboradorComponent},
 ];
 

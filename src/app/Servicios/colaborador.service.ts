@@ -18,17 +18,19 @@ export class ColaboradorService {
     return this.http.post(this.api+'/newcolaborador',colaborador);
   }
 
-  verColaboradores():Observable<any>{
-
-    return this.http.get(this.api+'/colaboradores');
+  verColaboradores(idUser, dpto):Observable<any>{
+    let params = new HttpParams();
+    params = params.append('id', idUser);
+    params = params.append('departamento', dpto);
+    return this.http.get(this.api+'/colaboradores', {params});
   }
 
 
-  pdfColaborador(id_index: any): Observable<any> {
+  pdfColaborador(id_index: any,doc_index:any): Observable<any> {
     let params = new HttpParams();
     params = params.append('id', id_index);
-    return this.http.get(this.api + '/show_index', { params, responseType: 'blob', headers: this.httpHeaders });
-
+    params = params.append('doc_index', doc_index);
+    return this.http.get(this.api + '/show_index', {params,responseType: 'blob', headers: this.httpHeaders });
   }
 
 

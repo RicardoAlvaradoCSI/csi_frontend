@@ -1,3 +1,4 @@
-.marcar:hover{
-color:red;
+.marcar:click{
+  background-color: #0585C0;
+  color: white;
 }

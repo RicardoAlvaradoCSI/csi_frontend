@@ -313,13 +313,7 @@ export class ColaboradoresComponent implements OnInit {
     this.modalColaboradores = false;
   }
 
-  validar_Codigo(){
-    if(this.token == this.tokenValida){
 
-      this.validaCodigo = false;
-      this.nuevaClave = true;
-    }
-  }
 
 
 
